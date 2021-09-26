@@ -26,7 +26,14 @@ public class PlayerMovement : NetworkBehaviour
 
     }
 
-   
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, direction * 10);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(transform.position, new Vector3(1, 1, 1));
+    }
+
     private void Update()
     {
         if (!isLocalPlayer)
@@ -68,6 +75,7 @@ public class PlayerMovement : NetworkBehaviour
             index++;
         }
         rbPlayer.MovePosition(spawnPoints[index].transform.position);
+        rbPlayer.velocity = Vector3.zero;
     }
 
     private void OnTriggerExit(Collider other)
